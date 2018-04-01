@@ -12,9 +12,14 @@
 
 ## 前端技术
 > 使用npm脚本启动python服务，webpack-dev-server启动前端服务并代理后端接口
+>- 技术栈react,webpack,ES6
+>- UI使用antd
 
-- react,webpack,npm,ES6
-- UI使用antd
+
+### 启动说明
+
+1. 执行`yarn` 安装所有依赖，或者执行`npm install`
+2. 执行`yarn start` 或者`npm start` 注意eslint的报错
 
 ### 开发过程总结
 

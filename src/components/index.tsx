@@ -4,6 +4,8 @@ import Sider from "./sider/sider"
 import Header from "./header/header"
 import Content from "./content/content"
 
+import "../assets/style/layout.less"
+
 const Root = ({ children }) => {
     return <div className="app">{children}</div>
 }
@@ -18,7 +20,7 @@ export default class Index extends React.Component {
             <Root>
                 <Header />
                 <Container>
-                    <Sider />
+                    {/* <Sider /> */}
                     <Content />
                 </Container>
                 {/* <Footer></Footer> */}

@@ -8,14 +8,21 @@
 
 import React, { Component, PureComponent } from "react"
 
-export default class Header extends Component {
+
+interface HeaderProps{
+    
+}
+
+export default class Header extends Component<HeaderProps> {
     render() {
         return (
-            <div className="header">
-                <div className="logo">NLP by zhoushen</div>
-                <Search />
-                <UserInfo />
-            </div>
+            <header role="banner">
+                <div className="header">
+                    <div className="logo">NLP</div>
+                    <Search />
+                    <UserInfo />
+                </div>
+            </header>
         )
     }
 }

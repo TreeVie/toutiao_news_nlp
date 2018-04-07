@@ -1,0 +1,71 @@
+@content-width: 1000px;
+#root {
+    width: 100%;
+    height: 100%;
+    .app {
+        display: flex;
+        flex-direction: column;
+        background: #f6f6f6;
+        header {
+            min-width: 1032px;
+            box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+            overflow: hidden;
+            background-color: #fff;
+            .header {
+                display: flex;
+                justify-content: space-around;
+                height: 52px;
+                width: @content-width;
+                padding: 0 16px;
+                margin: 0 auto;
+                .logo {
+                    flex: 1;
+                }
+                .search {
+                    flex: 6;
+                    min-width: 200px;
+                }
+                .user-info {
+                    flex: 3;
+                    min-width: 100px;
+                }
+            }
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            width: @content-width;
+            margin: 10px auto;
+            padding: 0 16px;
+            .TopstoryMain {
+                width: @content-width;
+                .Card {
+                    margin-bottom: 10px;
+                    background: #fff;
+                    overflow: hidden;
+                    border-radius: 2px;
+                    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+                    box-sizing: border-box;
+                    position: relative;
+                    .Close{
+                        background: none;
+                        border: none;
+                        position: absolute;
+                        color: #8590a6;
+                        cursor: pointer;
+                        top:12px;
+                        right: 16px;
+                        svg{
+                            fill: currentColor
+                        }
+                    }
+                    .feature{
+                        background-color: #fafafa;
+                        color: rgba(0,0,0,.65);
+                        padding: 5px;
+                    }
+                }
+            }
+        }
+    }
+}

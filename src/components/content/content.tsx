@@ -16,10 +16,44 @@ interface ContentProps {
 interface ContentState {
     dataSource: DataProps[]
 }
-
+interface Words {
+    // 中文词性标注
+    wtype_cn: string
+    // 词性标注
+    wtype: string
+    // 分词结果
+    word: string
+}
+interface Message {
+    // 新闻标签
+    label: string
+    // 新闻的大标题
+    title: string
+    // 摘要
+    abstract: string
+    // 摘要的分词处理
+    cut_list: Words[]
+    // 源地址
+    source_url: string
+    tag: string
+}
+interface ResultProps {
+    data: Message[]
+    time: string
+}
 export default class Content extends Component<ContentProps, ContentState> {
     state = {
         dataSource: []
+    }
+
+    getData(page = 1) {
+        fetch(`http://106.14.201.218:8000/get_toutiao_data?page=${page}`)
+            .then((response: Response) => {
+                return response.json()
+            })
+            .then((res: ResultProps) => {
+                res.data
+            })
     }
 
     componentDidMount() {
@@ -100,7 +134,13 @@ class Item extends Component<ItemProps> {
 function ButtonClose() {
     return (
         <button className="Button Close">
-            <svg viewBox="0 0 14 14" className="Icon Icon--remove" style={{width:10,height:10}} aria-hidden="true" data-reactid="85">
+            <svg
+                viewBox="0 0 14 14"
+                className="Icon Icon--remove"
+                style={{ width: 10, height: 10 }}
+                aria-hidden="true"
+                data-reactid="85"
+            >
                 <g>
                     <path d="M8.486 7l5.208-5.207c.408-.408.405-1.072-.006-1.483-.413-.413-1.074-.413-1.482-.005L7 5.515 1.793.304C1.385-.103.72-.1.31.31-.103.724-.103 1.385.305 1.793L5.515 7l-5.21 5.207c-.407.408-.404 1.072.007 1.483.413.413 1.074.413 1.482.005L7 8.485l5.207 5.21c.408.407 1.072.404 1.483-.007.413-.413.413-1.074.005-1.482L8.485 7z" />
                 </g>

@@ -39,10 +39,7 @@ module.exports = {
             "error",
             "double"
         ],
-        "semi": [
-            "error",
-            "never"
-        ],
+        "semi": "off",
         "no-console": "off",
         "no-unused-vars": "off"
     }

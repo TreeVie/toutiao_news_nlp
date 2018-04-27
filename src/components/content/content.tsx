@@ -9,12 +9,14 @@ import React, { Component } from "react"
 
 import Feed, { FeedDataProps as DataProps } from "./feed"
 
+let data = require("../../mock/data");
+
 interface ContentProps {
     // dataSource:DataProps[]
 }
 
 interface ContentState {
-    dataSource: DataProps[]
+    dataSource: DataProps[]|any
 }
 interface Words {
     // 中文词性标注
@@ -47,53 +49,54 @@ export default class Content extends Component<ContentProps, ContentState> {
     }
 
     getData(page = 1) {
-        fetch(`http://106.14.201.218:8000/get_toutiao_data?page=${page}`)
-            .then((response: Response) => {
-                return response.json()
-            })
-            .then((res: ResultProps) => {
-                res.data
-            })
+        // fetch(`http://106.14.201.218:8000/get_toutiao_data?page=${page}`)
+        //     .then((response: Response) => {
+        //         return response.json()
+        //     })
+        //     .then((res: ResultProps) => {
+        //         res.data
+        //     })
+        return Promise.resolve(()=>{
+            return [
+                {
+                    src:
+                        "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
+                    alt: "图片加载中...",
+                    features: ["二次元"]
+                },
+                {
+                    src:
+                        "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
+                    alt: "图片加载中...",
+                    features: ["二次元"]
+                },
+                {
+                    src:
+                        "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
+                    alt: "图片加载中...",
+                    features: ["二次元"]
+                },
+                {
+                    src:
+                        "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
+                    alt: "图片加载中...",
+                    features: ["二次元"]
+                },
+                {
+                    src:
+                        "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
+                    alt: "图片加载中...",
+                    features: ["二次元"]
+                }
+            ]
+        })
     }
 
     componentDidMount() {
         // 请求数据
-        setTimeout(() => {
-            this.setState({
-                dataSource: [
-                    {
-                        src:
-                            "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
-                        alt: "图片加载中...",
-                        features: ["二次元"]
-                    },
-                    {
-                        src:
-                            "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
-                        alt: "图片加载中...",
-                        features: ["二次元"]
-                    },
-                    {
-                        src:
-                            "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
-                        alt: "图片加载中...",
-                        features: ["二次元"]
-                    },
-                    {
-                        src:
-                            "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
-                        alt: "图片加载中...",
-                        features: ["二次元"]
-                    },
-                    {
-                        src:
-                            "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
-                        alt: "图片加载中...",
-                        features: ["二次元"]
-                    }
-                ]
-            })
-        }, 1000)
+        this.getData().then(res=>{
+            this.setState({dataSource:res})
+        })
     }
 
     render() {

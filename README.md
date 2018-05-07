@@ -13,7 +13,6 @@
 ## 前端技术
 > 使用npm脚本启动python服务，webpack-dev-server启动前端服务并代理后端接口
 >- 技术栈react,webpack,ES6
->- UI使用antd
 
 
 ### 启动说明

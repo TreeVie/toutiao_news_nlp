@@ -1,51 +1,63 @@
-import React from "react"
+import React, { KeyboardEvent } from "react"
+import {Message} from "./content"
+import Modal from "../widgets/modal"
 
 interface FeedProps {
     // 显示feature的最大数量
     MAXFEATURECOUNT?: number
-    data: FeedDataProps
+    data: Message
 }
 
 export interface FeedDataProps {
-    src: string
-    alt: string
-    features: string[]
+    
 }
 
-export default class Feed extends React.Component<FeedProps> {
+export default class Feed extends React.Component<FeedProps,any> {
     static defaultProps = {
-        MAXFEATURECOUNT: 3,
-        data: {}
+        MAXFEATURECOUNT: 3
+    }
+
+    constructor(props:FeedProps){
+        super(props);
+        this.state = {
+            showModal:false
+        }
+        this.onFeedClick = this.onFeedClick.bind(this);
+    }
+
+    onFeedClick(event:React.MouseEvent<HTMLDivElement>){
+        // 可以跳转的a标签
+        if((event.target as HTMLDivElement).className.includes("a_enable")){
+            return;
+        }
+        this.setState({showModal:true})
     }
 
     render() {
-        const { data: { src, alt, features }, MAXFEATURECOUNT } = this.props
+        const { data, MAXFEATURECOUNT } = this.props
         return (
-            <div className="Feed">
+            <div className="Feed" onClick={this.onFeedClick}>
                 <div className="FeedSource">
                     <div className="FeedSource-fristline">
                         <p>
-                            来源:<span>今日头条</span>
+                            来源:<span>{data.label}</span>
                         </p>
                     </div>
                     <div className="ContentItem">
-                        <img src={src} alt={alt} />
+                        <img style={{height:Math.max(100,240*(Math.random()))}} src={"http://www.cr173.com/up/2016-4/14616501097482450.jpg"} />
                         <h2 className="ContentItem-title">
-                            美国和中国打过贸易战吗？
+                            <a className="a_enable" href={data.source_url} target="blank">{data.title||"美国和中国打过贸易战吗？"}</a>
                         </h2>
                         <div className="AnswerItem-extraInfo" />
-                        <div className="">
-                            1990年我去了一趟莫斯科，也就是前苏联解体前的一年多。巨大的超市货架上空空如也。只有两个商品：塑料袋和番茄汁（无添加肉或洋葱的）。每样商品的间距好大啊，有50厘米。在火车上认识的两个中国人，其中一个人提出去超市转一圈，顺便买个饮料，当时国内的超市也不怎么样，想想应该见识一下莫斯科的超市。结果我们三人到了超市，他实在没办法，就买了一瓶番茄汁喝了，我也尝了一口，基本可以当饮料。
-                            作者：匿名用户
-                            链接：https://www.zhihu.com/question/271396589/answer/361689296
-                            来源：知乎
-                            著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-                        </div>
+                        <article className="">
+                            {data.abstract}
+                        </article>
                     </div>
                     <div className="FeedSource-lastline">
-                        <Feature features={features} count={MAXFEATURECOUNT} />
+                        <Feature features={data.cut_list} count={MAXFEATURECOUNT} />
                     </div>
                 </div>
+                {this.state.showModal&&<Modal title={"Hello"}></Modal>}
             </div>
         )
     }
@@ -54,16 +66,14 @@ export default class Feed extends React.Component<FeedProps> {
 function Feature({ features, count }) {
     return (
         <div className="features">
-            {features &&
-                features.reduce((pref, f, i) => {
-                    let _f = (
+            {features && ((features.length = Math.min(features.length,count)),1) &&
+                features.map((feature, i) => {
+                    return (
                         <span key={i} className="feature">
-                            {f}
+                            {feature.word}
                         </span>
                     )
-                    i < count && pref.push(_f)
-                    return pref
-                }, [])}
+                })}
         </div>
     )
 }

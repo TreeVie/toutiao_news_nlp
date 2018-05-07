@@ -9,14 +9,14 @@ import React, { Component } from "react"
 
 import Feed, { FeedDataProps as DataProps } from "./feed"
 
-let data = require("../../mock/data");
+import dataSource from "../../mock/data";
 
 interface ContentProps {
     // dataSource:DataProps[]
 }
 
 interface ContentState {
-    dataSource: DataProps[]|any
+    dataSource: ResultProps
 }
 interface Words {
     // 中文词性标注
@@ -26,7 +26,7 @@ interface Words {
     // 分词结果
     word: string
 }
-interface Message {
+export interface Message {
     // 新闻标签
     label: string
     // 新闻的大标题
@@ -37,15 +37,19 @@ interface Message {
     cut_list: Words[]
     // 源地址
     source_url: string
-    tag: string
+    tag: string,
+    [s:string]:any
 }
 interface ResultProps {
     data: Message[]
-    time: string
+    time: string[]
 }
 export default class Content extends Component<ContentProps, ContentState> {
     state = {
-        dataSource: []
+        dataSource: {
+            data:[],
+            time:[]
+        }
     }
 
     getData(page = 1) {
@@ -56,40 +60,39 @@ export default class Content extends Component<ContentProps, ContentState> {
         //     .then((res: ResultProps) => {
         //         res.data
         //     })
-        return Promise.resolve(()=>{
-            return [
-                {
-                    src:
-                        "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
-                    alt: "图片加载中...",
-                    features: ["二次元"]
-                },
-                {
-                    src:
-                        "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
-                    alt: "图片加载中...",
-                    features: ["二次元"]
-                },
-                {
-                    src:
-                        "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
-                    alt: "图片加载中...",
-                    features: ["二次元"]
-                },
-                {
-                    src:
-                        "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
-                    alt: "图片加载中...",
-                    features: ["二次元"]
-                },
-                {
-                    src:
-                        "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
-                    alt: "图片加载中...",
-                    features: ["二次元"]
-                }
-            ]
-        })
+        // return Promise.resolve([
+        //     {
+        //         src:
+        //             "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
+        //         alt: "图片加载中...",
+        //         features: ["二次元"]
+        //     },
+        //     {
+        //         src:
+        //             "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
+        //         alt: "图片加载中...",
+        //         features: ["二次元"]
+        //     },
+        //     {
+        //         src:
+        //             "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
+        //         alt: "图片加载中...",
+        //         features: ["二次元"]
+        //     },
+        //     {
+        //         src:
+        //             "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
+        //         alt: "图片加载中...",
+        //         features: ["二次元"]
+        //     },
+        //     {
+        //         src:
+        //             "http://www.cr173.com/up/2016-4/14616501097482450.jpg",
+        //         alt: "图片加载中...",
+        //         features: ["二次元"]
+        //     }
+        // ])
+        return Promise.resolve(dataSource)
     }
 
     componentDidMount() {
@@ -101,9 +104,16 @@ export default class Content extends Component<ContentProps, ContentState> {
 
     render() {
         const { dataSource } = this.state
+        let _data = dataSource.data.map((d,i)=>{
+            
+            return ({
+                ...d,
+                time:dataSource.time[i]
+            })
+        })
         return (
             <div className="TopstoryMain">
-                {dataSource.map((data, index) => {
+                {_data.map((data, index) => {
                     return <Item key={index} data={data} />
                 })}
             </div>
@@ -112,7 +122,7 @@ export default class Content extends Component<ContentProps, ContentState> {
 }
 
 interface ItemProps {
-    data: DataProps
+    data: any
 }
 
 /**

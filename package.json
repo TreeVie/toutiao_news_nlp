@@ -48,10 +48,12 @@
     "html-webpack-plugin": "webpack-contrib/html-webpack-plugin",
     "less": "^3.0.1",
     "less-loader": "^4.1.0",
+    "react-axe": "^3.0.1",
     "react-hot-loader": "^3.1.1",
     "style-loader": "^0.20.3",
     "typescript": "^2.8.1",
     "webpack": "^2.3.3",
-    "webpack-dev-server": "^2.4.2"
+    "webpack-dev-server": "^2.4.2",
+    "why-did-you-update": "^0.1.1"
   }
 }

@@ -57,7 +57,7 @@ export default class Feed extends React.Component<FeedProps,any> {
                         <Feature features={data.cut_list} count={MAXFEATURECOUNT} />
                     </div>
                 </div>
-                {this.state.showModal&&<Modal title={"Hello"}></Modal>}
+                <Modal show={this.state.showModal} title={"Hello"}></Modal>
             </div>
         )
     }

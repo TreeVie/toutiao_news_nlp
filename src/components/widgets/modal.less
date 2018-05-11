@@ -1,3 +1,5 @@
+@import url("../../assets/style/colors.less");
+
 .modal-mask{
     position: fixed;
     left: 0;
@@ -11,7 +13,17 @@
 .modal-content{
     position: absolute;
     left: 50%;
-    top:50%;
-    transform: translate(50%,50%);
+    top:40%;
+    transform: translate(-50%,-50%);
     display: flex;
+    width: 65%;
+    height: 300px;
+    background-color: aliceblue;
+    border-radius: 5px;
+    .modal-title{
+        padding: 10px 0 0 6px;
+        font-size: 14px;
+        font-weight: bolder;
+        border-bottom: 1px solid @border-color;
+    }
 }
